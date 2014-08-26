@@ -1,0 +1,24 @@
+{
+    "Entity": {
+        "General": {
+            "Gravity": 9.8,
+            "Jump": 1.0,
+
+            "PerTick": {
+                "Standard": 1
+            }
+        },
+
+        "Specific": {
+            "falling-block": {
+                "Gravity": 1.08
+            },
+            "player": {
+                "Gravity": 1.075
+            },
+            "chicken": {
+                "Gravity": 1.002
+            }
+        }
+    }
+}
