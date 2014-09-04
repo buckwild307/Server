@@ -3,6 +3,7 @@ package com.beeselmane.cubition.exception;
 import java.io.PrintStream;
 
 public class PathFindException extends Exception {
+
     private String message = null;
     private int exit = 1;
 

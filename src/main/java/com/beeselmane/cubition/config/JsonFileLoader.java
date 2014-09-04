@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JsonFileLoader {
+
     private ConfigurationObject fileObject = null;
     private String filePath = null;
     private File file = null;
@@ -31,7 +32,8 @@ public class JsonFileLoader {
         this.load(configMap);
     }
 
-    private Object[] readArray(JsonReader reader, ConfigurationTypeEnum[] types, String currentkey, Map<String, ConfigurationTypeEnum> map) throws IOException {
+    private Object[] readArray(JsonReader reader, ConfigurationTypeEnum[] types, String currentkey, Map<String,
+            ConfigurationTypeEnum> map) throws IOException {
         Object[] array = new Object[types.length];
         int i = 0;
         reader.beginArray();
@@ -42,7 +44,8 @@ public class JsonFileLoader {
                     array[i] = this.readObject(currentkey + ConfigurationObject.PATH_SEPARATOR + "[", reader, map);
                     break;
                 case TYPE_ARRAY:
-                    array[i] = this.readArray(reader, types, currentkey + ConfigurationObject.PATH_SEPARATOR + "[", map);
+                    array[i] = this.readArray(reader, types, currentkey + ConfigurationObject.PATH_SEPARATOR + "[",
+                            map);
                     break;
                 case TYPE_STRING:
                     array[i] = reader.nextString();
@@ -76,7 +79,8 @@ public class JsonFileLoader {
         return array;
     }
 
-    private ConfigurationObject readObject(String key, JsonReader reader, Map<String, ConfigurationTypeEnum> map) throws IOException {
+    private ConfigurationObject readObject(String key, JsonReader reader, Map<String,
+            ConfigurationTypeEnum> map) throws IOException {
         ConfigurationObject object = new ConfigurationObject(new HashMap<String, ConfigurationTypeEnum>(),
                 new HashMap<String, Object>(), new ArrayList<String>());
         reader.beginObject();
@@ -94,7 +98,8 @@ public class JsonFileLoader {
                         object.value.put(globalkey, this.readObject(globalkey, reader, map));
                         break;
                     case TYPE_ARRAY:
-                        object.value.put(globalkey, this.readArray(reader, map.get(globalkey).arrayTypes, globalkey, map));
+                        object.value.put(globalkey, this.readArray(reader, map.get(globalkey).arrayTypes, globalkey,
+                                map));
                         break;
                     case TYPE_STRING:
                         object.value.put(globalkey, reader.nextString());
@@ -130,7 +135,9 @@ public class JsonFileLoader {
     private void load(Map<String, ConfigurationTypeEnum> map) {
         try {
             String fileContents = FileUtil.readFull(this.filePath);
-            if (fileContents.equals(ConfigurationObject.BLANK_CONFIG)) return;
+            if (fileContents.equals(ConfigurationObject.BLANK_CONFIG)) {
+                return;
+            }
             JsonReader reader = new JsonReader(new StringReader(fileContents));
             this.fileObject = this.readObject("", reader, map);
             reader.close();
@@ -151,7 +158,8 @@ public class JsonFileLoader {
                 this.writeArray((Object[]) object, writer);
             } else if (object instanceof String) {
                 writer.value((String) object);
-            } else if (object instanceof Long || object instanceof Double || object instanceof Integer || object instanceof Byte) {
+            } else if (object instanceof Long || object instanceof Double || object instanceof Integer || object
+                    instanceof Byte) {
                 writer.value((double) object);
             } else if (object instanceof Boolean) {
                 writer.value((boolean) object);

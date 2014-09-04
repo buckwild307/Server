@@ -21,7 +21,7 @@
                             <addClasspath>false</addClasspath>
                         </manifest>
                         <manifestEntries>
-                            <Main-Class>com.beeselmane.jgame.JavaGameServer</Main-Class>
+                            <Main-Class>com.beeselmane.cubition.CubitionServer</Main-Class>
                         </manifestEntries>
                     </archive>
                 </configuration>

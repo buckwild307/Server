@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class FileUtil {
+
     private FileUtil() {
     }
 
@@ -16,7 +17,11 @@ public class FileUtil {
 
     public static void createIfNoExist(String path) throws IOException {
         File file = new File(path);
-        if (file.exists()) return;
-        if (!file.createNewFile()) throw new IOException("Could not create file: " + path);
+        if (file.exists()) {
+            return;
+        }
+        if (!file.createNewFile()) {
+            throw new IOException("Could not create file: " + path);
+        }
     }
 }

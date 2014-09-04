@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ItemRegistry {
+
     private Map<Class<? extends ItemStack>, Integer> item_id = new HashMap<>();
     private Map<Class<? extends ItemStack>, String> item_name = new HashMap<>();
     private Map<Integer, Class<? extends ItemStack>> id_item = new HashMap<>();
@@ -15,9 +16,15 @@ public class ItemRegistry {
     private Map<String, Integer> name_id = new HashMap<>();
 
     public void register(int id, String name, Class<? extends ItemStack> item) {
-        if (this.item_id.containsKey(item)) throw new ItemAlreadyRegisteredException(null, item);
-        if (this.id_item.containsKey(id)) throw new ItemAlreadyRegisteredException(null, id);
-        if (this.name_item.containsKey(name)) throw new ItemAlreadyRegisteredException(null, name);
+        if (this.item_id.containsKey(item)) {
+            throw new ItemAlreadyRegisteredException(null, item);
+        }
+        if (this.id_item.containsKey(id)) {
+            throw new ItemAlreadyRegisteredException(null, id);
+        }
+        if (this.name_item.containsKey(name)) {
+            throw new ItemAlreadyRegisteredException(null, name);
+        }
 
         this.item_id.put(item, id);
         this.item_name.put(item, name);
@@ -28,9 +35,15 @@ public class ItemRegistry {
     }
 
     public void register(ItemRegistrySet set) {
-        if (this.item_id.containsKey(set.item)) throw new ItemAlreadyRegisteredException(null, set.item);
-        if (this.id_item.containsKey(set.id)) throw new ItemAlreadyRegisteredException(null, set.id);
-        if (this.name_item.containsKey(set.name)) throw new ItemAlreadyRegisteredException(null, set.name);
+        if (this.item_id.containsKey(set.item)) {
+            throw new ItemAlreadyRegisteredException(null, set.item);
+        }
+        if (this.id_item.containsKey(set.id)) {
+            throw new ItemAlreadyRegisteredException(null, set.id);
+        }
+        if (this.name_item.containsKey(set.name)) {
+            throw new ItemAlreadyRegisteredException(null, set.name);
+        }
 
         this.item_id.put(set.item, set.id);
         this.item_name.put(set.item, set.name);
@@ -41,7 +54,9 @@ public class ItemRegistry {
     }
 
     public void remove(int id) {
-        if (!id_name.containsKey(id)) return;
+        if (!id_name.containsKey(id)) {
+            return;
+        }
 
         ItemRegistrySet set = new ItemRegistrySet();
         set.getFrom(this, id);
@@ -55,7 +70,9 @@ public class ItemRegistry {
     }
 
     public void remove(String name) {
-        if (!name_id.containsKey(name)) return;
+        if (!name_id.containsKey(name)) {
+            return;
+        }
 
         ItemRegistrySet set = new ItemRegistrySet();
         set.getFrom(this, name);
@@ -69,7 +86,9 @@ public class ItemRegistry {
     }
 
     public void remove(Class<? extends ItemStack> item) {
-        if (!item_id.containsKey(item)) return;
+        if (!item_id.containsKey(item)) {
+            return;
+        }
 
         ItemRegistrySet set = new ItemRegistrySet();
         set.getFrom(this, item);
@@ -83,6 +102,7 @@ public class ItemRegistry {
     }
 
     public class ItemRegistrySet {
+
         private int id;
         private String name;
         private Class<? extends ItemStack> item;

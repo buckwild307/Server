@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class ServerModList {
+
     private Map<String, JavaMod> mods = new HashMap<>();
     private Map<String, JavaModLoader> loaders = new HashMap<>();
 

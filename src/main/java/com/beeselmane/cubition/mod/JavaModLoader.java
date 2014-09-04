@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class JavaModLoader {
+
     private boolean loaded = false;
     private String modFile;
     private JavaMod mod;

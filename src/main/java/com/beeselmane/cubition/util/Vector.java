@@ -1,6 +1,7 @@
 package com.beeselmane.cubition.util;
 
 public class Vector {
+
     Location location;
     Velocity momentum;
 

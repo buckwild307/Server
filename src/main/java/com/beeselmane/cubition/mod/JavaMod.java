@@ -3,8 +3,9 @@ package com.beeselmane.cubition.mod;
 /**
  * Base class for JVM-based modifications to Cubition. This class should be
  * extended by the main class of all mods / plugins for Cubition.
- */ 
+ */
 public abstract class JavaMod {
+
     private JavaModLoader loader;
     private JavaModInfo info;
     private boolean enabled;

@@ -31,7 +31,9 @@ public enum Direction {
 
     public static Direction deserialize(int from) {
         for (Direction direction : Direction.values()) {
-            if (direction.serialID == from) return direction;
+            if (direction.serialID == from) {
+                return direction;
+            }
         }
 
         return null;

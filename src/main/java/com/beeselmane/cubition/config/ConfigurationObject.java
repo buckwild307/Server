@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ConfigurationObject {
+
     public static final String PATH_SEPARATOR = ".";
     public static final String BLANK_CONFIG = "\n";
 

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EntityRegistry {
+
     private Map<Class<? extends Entity>, Integer> entity_id = new HashMap<>();
     private Map<Class<? extends Entity>, String> entity_name = new HashMap<>();
     private Map<Integer, Class<? extends Entity>> id_entity = new HashMap<>();
@@ -15,9 +16,15 @@ public class EntityRegistry {
     private Map<String, Integer> name_id = new HashMap<>();
 
     public void register(int id, String name, Class<? extends Entity> entity) {
-        if (this.entity_id.containsKey(entity)) throw new EntityAlreadyRegisteredException(null, entity);
-        if (this.id_entity.containsKey(id)) throw new EntityAlreadyRegisteredException(null, id);
-        if (this.name_entity.containsKey(name)) throw new EntityAlreadyRegisteredException(null, name);
+        if (this.entity_id.containsKey(entity)) {
+            throw new EntityAlreadyRegisteredException(null, entity);
+        }
+        if (this.id_entity.containsKey(id)) {
+            throw new EntityAlreadyRegisteredException(null, id);
+        }
+        if (this.name_entity.containsKey(name)) {
+            throw new EntityAlreadyRegisteredException(null, name);
+        }
 
         this.entity_id.put(entity, id);
         this.entity_name.put(entity, name);
@@ -28,9 +35,15 @@ public class EntityRegistry {
     }
 
     public void register(EntityRegistrySet set) {
-        if (this.entity_id.containsKey(set.entity)) throw new EntityAlreadyRegisteredException(null, set.entity);
-        if (this.id_entity.containsKey(set.id)) throw new EntityAlreadyRegisteredException(null, set.id);
-        if (this.name_entity.containsKey(set.name)) throw new EntityAlreadyRegisteredException(null, set.name);
+        if (this.entity_id.containsKey(set.entity)) {
+            throw new EntityAlreadyRegisteredException(null, set.entity);
+        }
+        if (this.id_entity.containsKey(set.id)) {
+            throw new EntityAlreadyRegisteredException(null, set.id);
+        }
+        if (this.name_entity.containsKey(set.name)) {
+            throw new EntityAlreadyRegisteredException(null, set.name);
+        }
 
         this.entity_id.put(set.entity, set.id);
         this.entity_name.put(set.entity, set.name);
@@ -41,7 +54,9 @@ public class EntityRegistry {
     }
 
     public void remove(int id) {
-        if (!id_name.containsKey(id)) return;
+        if (!id_name.containsKey(id)) {
+            return;
+        }
 
         EntityRegistrySet set = new EntityRegistrySet();
         set.getFrom(this, id);
@@ -55,7 +70,9 @@ public class EntityRegistry {
     }
 
     public void remove(String name) {
-        if (!name_id.containsKey(name)) return;
+        if (!name_id.containsKey(name)) {
+            return;
+        }
 
         EntityRegistrySet set = new EntityRegistrySet();
         set.getFrom(this, name);
@@ -69,7 +86,9 @@ public class EntityRegistry {
     }
 
     public void remove(Class<? extends Entity> entity) {
-        if (!entity_id.containsKey(entity)) return;
+        if (!entity_id.containsKey(entity)) {
+            return;
+        }
 
         EntityRegistrySet set = new EntityRegistrySet();
         set.getFrom(this, entity);
@@ -83,6 +102,7 @@ public class EntityRegistry {
     }
 
     public class EntityRegistrySet {
+
         private int id;
         private String name;
         private Class<? extends Entity> entity;

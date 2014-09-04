@@ -1,6 +1,7 @@
 package com.beeselmane.cubition.util;
 
 public class Velocity {
+
     private Direction direction;
     private double speed;
 

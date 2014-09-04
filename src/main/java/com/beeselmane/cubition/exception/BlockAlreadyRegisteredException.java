@@ -5,6 +5,7 @@ import com.beeselmane.cubition.world.Block;
 import java.io.PrintStream;
 
 public class BlockAlreadyRegisteredException extends RuntimeException {
+
     private Class<? extends Block> block;
     private String name;
     private int id;
@@ -40,8 +41,11 @@ public class BlockAlreadyRegisteredException extends RuntimeException {
 
     @Override
     public void printStackTrace(PrintStream stream) {
-        if (this.getMessage() != null) stream.println(this.getMessage());
-        stream.println("BlockAlreadyRegisteredException: " + ((name != null) ? name : (this.block != null) ? block : id) + " already registered!");
+        if (this.getMessage() != null) {
+            stream.println(this.getMessage());
+        }
+        stream.println("BlockAlreadyRegisteredException: " + ((name != null) ? name : (this.block != null) ? block :
+                id) + " already registered!");
         stream.println("Caused by: ");
         Thread.dumpStack();
     }

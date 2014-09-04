@@ -1,9 +1,10 @@
 package com.beeselmane.cubition.world;
 
-import com.beeselmane.cubition.util.Vector;
 import com.beeselmane.cubition.entity.base.Entity;
+import com.beeselmane.cubition.util.Vector;
 
 public class World {
+
     private long assignedEntityIDs = -1;
 
     /**

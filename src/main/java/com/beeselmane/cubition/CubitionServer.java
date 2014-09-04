@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class CubitionServer {
+
     public static final int GENERIC_ERROR = -1;
     public static final int INVALID_JARNAME = 2;
     public static final int PATH_CONTAINS_MULTIPLE_JARS = 3;
@@ -53,11 +54,22 @@ public class CubitionServer {
             } else {
                 String[] files = path.list();
                 List<String> jars = new ArrayList<>();
-                for (String file : files) if (file.endsWith(".jar")) jars.add(file);
-                if (jars.size() > 1)
-                    throw new PathFindException("The Running Path contains multiple jars, and the current one could not be determined", PATH_CONTAINS_MULTIPLE_JARS);
-
-                CubitionServer.thisJarFile = thisPath + jars.get(1);
+                for (String file : files) {
+                    if (file.endsWith(".jar")) {
+                        jars.add(file);
+                    }
+                }
+                if (jars.size() > 1) {
+                    throw new PathFindException("The Running Path contains multiple jars," +
+                            "" + " and the current one could not be determined", PATH_CONTAINS_MULTIPLE_JARS);
+                } else if (jars.size() == 0) {
+                    // We don't seem to have any classpath-bound .jar files,
+                    // Run from the folder itself.
+                    CubitionServer.thisJarFile = thisPath;
+                } else {
+                    // Use the first .jar file found as our classpath file.
+                    CubitionServer.thisJarFile = thisPath + jars.get(0);
+                }
             }
         } else if (abstractPath.endsWith(".jar")) {
             int finals = abstractPath.lastIndexOf("/");
@@ -76,6 +88,7 @@ public class CubitionServer {
             CubitionServer.setupPath();
         } catch (PathFindException ex) {
             ex.printStackTrace(System.err);
+            System.exit(GENERIC_ERROR);
         }
 
         CubitionServer.server = new CubitionServer();
@@ -94,10 +107,21 @@ public class CubitionServer {
         File pluginDir = new File(CubitionServer.thisPath + "plugins/");
         File configDir = new File(CubitionServer.thisPath + "config/");
 
-        if (!modTmpDir.exists())
-            if (!modTmpDir.mkdirs()) throw new IOException("Could not create mods directory (or tmp directory)");
-        if (!pluginDir.exists()) if (!pluginDir.mkdirs()) throw new IOException("Could not create plugin directory");
-        if (!configDir.exists()) if (!configDir.mkdirs()) throw new IOException("Could not create config directory");
+        if (!modTmpDir.exists()) {
+            if (!modTmpDir.mkdirs()) {
+                throw new IOException("Could not create mods directory (or tmp directory)");
+            }
+        }
+        if (!pluginDir.exists()) {
+            if (!pluginDir.mkdirs()) {
+                throw new IOException("Could not create plugin directory");
+            }
+        }
+        if (!configDir.exists()) {
+            if (!configDir.mkdirs()) {
+                throw new IOException("Could not create config directory");
+            }
+        }
 
         for (String modFile : modDir.list()) {
             if (modFile.endsWith(".mod")) {

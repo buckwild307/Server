@@ -13,9 +13,10 @@ import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import static com.beeselmane.cubition.JavaGameServer.getPath;
+import static com.beeselmane.cubition.CubitionServer.getPath;
 
 public class JavaModInfo {
+
     private List<String> authors = new ArrayList<>();
     private boolean jsonConfiguration;
     private String mainClass;
@@ -86,8 +87,9 @@ public class JavaModInfo {
                 }
             }
 
-            if (configStream == null)
+            if (configStream == null) {
                 throw new InvalidModException("Mod does not contain a config file!" + this.modFile.getName());
+            }
             if (this.jsonConfiguration) {
                 //
             } else {

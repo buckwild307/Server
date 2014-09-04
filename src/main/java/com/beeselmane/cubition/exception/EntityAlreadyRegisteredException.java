@@ -5,6 +5,7 @@ import com.beeselmane.cubition.entity.base.Entity;
 import java.io.PrintStream;
 
 public class EntityAlreadyRegisteredException extends RuntimeException {
+
     private int id;
     private String name;
     private Class<? extends Entity> entity;
@@ -40,8 +41,11 @@ public class EntityAlreadyRegisteredException extends RuntimeException {
 
     @Override
     public void printStackTrace(PrintStream stream) {
-        if (this.getMessage() != null) stream.println(this.getMessage());
-        stream.println("EntityAlreadyRegisteredException: " + ((name != null) ? name : (entity != null) ? entity : id) + " already registered!");
+        if (this.getMessage() != null) {
+            stream.println(this.getMessage());
+        }
+        stream.println("EntityAlreadyRegisteredException: " + ((name != null) ? name : (entity != null) ? entity :
+                id) + " already registered!");
         stream.println("Caused by: ");
         Thread.dumpStack();
     }

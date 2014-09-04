@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BlockRegistry {
+
     private Map<Class<? extends Block>, Integer> block_id = new HashMap<>();
     private Map<Class<? extends Block>, String> block_name = new HashMap<>();
     private Map<Integer, Class<? extends Block>> id_block = new HashMap<>();
@@ -15,9 +16,15 @@ public class BlockRegistry {
     private Map<String, Integer> name_id = new HashMap<>();
 
     public void register(int id, String name, Class<? extends Block> block) {
-        if (this.block_id.containsKey(block)) throw new BlockAlreadyRegisteredException(null, block);
-        if (this.id_block.containsKey(id)) throw new BlockAlreadyRegisteredException(null, id);
-        if (this.name_block.containsKey(name)) throw new BlockAlreadyRegisteredException(null, name);
+        if (this.block_id.containsKey(block)) {
+            throw new BlockAlreadyRegisteredException(null, block);
+        }
+        if (this.id_block.containsKey(id)) {
+            throw new BlockAlreadyRegisteredException(null, id);
+        }
+        if (this.name_block.containsKey(name)) {
+            throw new BlockAlreadyRegisteredException(null, name);
+        }
 
         this.block_id.put(block, id);
         this.block_name.put(block, name);
@@ -28,9 +35,15 @@ public class BlockRegistry {
     }
 
     public void register(BlockRegistrySet set) {
-        if (this.block_id.containsKey(set.block)) throw new BlockAlreadyRegisteredException(null, set.block);
-        if (this.id_block.containsKey(set.id)) throw new BlockAlreadyRegisteredException(null, set.id);
-        if (this.name_block.containsKey(set.name)) throw new BlockAlreadyRegisteredException(null, set.name);
+        if (this.block_id.containsKey(set.block)) {
+            throw new BlockAlreadyRegisteredException(null, set.block);
+        }
+        if (this.id_block.containsKey(set.id)) {
+            throw new BlockAlreadyRegisteredException(null, set.id);
+        }
+        if (this.name_block.containsKey(set.name)) {
+            throw new BlockAlreadyRegisteredException(null, set.name);
+        }
 
         this.block_id.put(set.block, set.id);
         this.block_name.put(set.block, set.name);
@@ -41,7 +54,9 @@ public class BlockRegistry {
     }
 
     public void remove(int id) {
-        if (!id_name.containsKey(id)) return;
+        if (!id_name.containsKey(id)) {
+            return;
+        }
 
         BlockRegistrySet set = new BlockRegistrySet();
         set.getFrom(this, id);
@@ -55,7 +70,9 @@ public class BlockRegistry {
     }
 
     public void remove(String name) {
-        if (!name_id.containsKey(name)) return;
+        if (!name_id.containsKey(name)) {
+            return;
+        }
 
         BlockRegistrySet set = new BlockRegistrySet();
         set.getFrom(this, name);
@@ -69,7 +86,9 @@ public class BlockRegistry {
     }
 
     public void remove(Class<? extends Block> block) {
-        if (!block_id.containsKey(block)) return;
+        if (!block_id.containsKey(block)) {
+            return;
+        }
 
         BlockRegistrySet set = new BlockRegistrySet();
         set.getFrom(this, block);
@@ -83,6 +102,7 @@ public class BlockRegistry {
     }
 
     public class BlockRegistrySet {
+
         private int id;
         private String name;
         private Class<? extends Block> block;

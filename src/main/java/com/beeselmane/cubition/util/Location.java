@@ -3,6 +3,7 @@ package com.beeselmane.cubition.util;
 import com.beeselmane.cubition.world.World;
 
 public class Location {
+
     private double x, y, z;
     private World world;
 

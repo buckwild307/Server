@@ -5,10 +5,11 @@ import com.beeselmane.cubition.exception.EntityNotInsideRegistryException;
 import com.beeselmane.cubition.registry.EntityRegistry;
 import com.beeselmane.cubition.util.Direction;
 import com.beeselmane.cubition.util.Vector;
-import com.beeselmane.cubition.world.World;
 import com.beeselmane.cubition.util.Velocity;
+import com.beeselmane.cubition.world.World;
 
 public abstract class Entity {
+
     protected static EntityBehavior behavior;
     protected boolean isFalling, isOnGround;
     protected double health = -1D, maxHealth = -1D, sinceFall;
@@ -23,7 +24,9 @@ public abstract class Entity {
     public Entity(World world, EntityRegistry registry) {
         EntityRegistry.EntityRegistrySet registrySet = registry.new EntityRegistrySet();
         registrySet.getFrom(registry, this.getClass());
-        if (registrySet.name() == null) throw new EntityNotInsideRegistryException();
+        if (registrySet.name() == null) {
+            throw new EntityNotInsideRegistryException();
+        }
 
         this.world = world;
         this.id = world.getOpenEntityID();
@@ -123,7 +126,9 @@ public abstract class Entity {
 
     public void dealDamage(double damage) {
         this.health -= damage;
-        if (this.health <= 0) this.kill();
+        if (this.health <= 0) {
+            this.kill();
+        }
     }
 
     public abstract void tick();
@@ -137,6 +142,7 @@ public abstract class Entity {
     }
 
     protected static abstract class PathFinder {
+
         public Entity entity;
         public int path_length = 0;
         public Motion[] path = new Motion[path_length];

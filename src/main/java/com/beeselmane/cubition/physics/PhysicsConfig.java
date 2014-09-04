@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class PhysicsConfig {
+
     private static PhysicsConfig instance;
 
     /**
