@@ -1,7 +1,10 @@
 package com.beeselmane.cubition.mod;
 
-public class JavaMod // Mod Main classes should extend this
-{
+/**
+ * Base class for JVM-based modifications to Cubition. This class should be
+ * extended by the main class of all mods / plugins for Cubition.
+ */ 
+public abstract class JavaMod {
     private JavaModLoader loader;
     private JavaModInfo info;
     private boolean enabled;
@@ -19,7 +22,7 @@ public class JavaMod // Mod Main classes should extend this
         return info.getName();
     }
 
-    public void enable() {
+    public final void enable() {
         if (!this.enabled) {
             this.onEnable();
         }
